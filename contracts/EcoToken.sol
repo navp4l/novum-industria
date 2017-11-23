@@ -16,6 +16,8 @@ contract EcoToken is ERC20TokenInterface, Owned {
     string constant public symbol = "ECT";
     uint8 constant public decimalUnits = 0;
 
+    uint256 constant public MULT_FACT = 10 ** 18;
+
     uint256 public totalSupply;
 
     //threshold mappings - this would come from an oracle
@@ -105,16 +107,14 @@ contract EcoToken is ERC20TokenInterface, Owned {
 
     //manipulate totalUsage
     function updateTotalUsage(uint256 newUsageData) public {
-        totalUsageData += newUsageData;
+        totalUsageData = totalUsageData.add(newUsageData);
 
-        //Compare the current usage data to the threshold
+        //Compare the c urrent usage data to the threshold
         //Assume that its end of the month and transfer tokens if the usage is lower than thershold
         if (totalUsageData < thresholdMappings[1]) {
             //transfer tokens (equal to the diff in consumption) to the user's addrs. One to one mapping of difference to tokens here
-//            uint diffVal = thresholdMappings[1] - newUsageData;
-            uint diffVal = 50;
-//            address _toAddrs = "0x3210f04de7e20df51cfb68a1c916cb647649a151";
-            transfer(0x3210f04de7e20df51cfb68a1c916cb647649a151, diffVal);
+            uint diffVal = thresholdMappings[1].subtract(totalUsageData);
+            transfer(0x2cdd5eebe58eff29d0cca2971cdddc9fb941faa4, (diffVal * MULT_FACT));
         }
     }
 

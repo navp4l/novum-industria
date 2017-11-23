@@ -95,7 +95,7 @@ window.App = {
     var meta;
     EcoToken.deployed().then(function(instance) {
       meta = instance;
-      return meta.updateTotalUsage(amount, {from: account});
+      return meta.updateTotalUsage(amount, {from: account, nonce: 5});
     }).then(function() {
       self.setStatus("Transaction complete!");
       self.getTotalUsage();

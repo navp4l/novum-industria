@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Novum Industria</title>
-    <link rel="stylesheet" href="./app.css">
     <script src="./app.js"></script>
   </head>
   <body>
@@ -18,9 +17,18 @@
         
     </nav>
 
+    <span id="status"></span>
+
     <h3>Your total usage for the month is <span class="black"><span id="usage"></span></span></h3>
 
     <h3>You have <span class="black"><span id="balance"></span> Eco Tokens</span></h3>
+
+
+    <br>
+    <h1>Update Usage data</h1>
+    <br><label for="amount">Amount:</label><input type="text" id="amount" placeholder="e.g., 95"></input>
+    <br><br><button id="send" onclick="App.updateUsage()">Update usage</button>
+    <br><br>
 
 
   </body>

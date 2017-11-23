@@ -1,4 +1,4 @@
-
+/*
 *{
   font-family: avenir, sans-serif;
   color: white;
@@ -25,7 +25,7 @@ nav img{
   .logo{
     margin: 24px;
     height: 40px;width: 40px;
-    /*background-image: url("../assets/N-coin-purple-1.png");*/
+    /*background-image: url("../assets/N-coin-purple-1.png");
     background-size: contain;
   }
 
@@ -45,7 +45,7 @@ footer{
     padding: 18px;
   }
 
-
+*/
 
 
 .container{

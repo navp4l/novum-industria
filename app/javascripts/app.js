@@ -19,76 +19,91 @@ var account;
 
 window.App = {
 
-start: function() {
-    alert("start: funct");
-}
+  start: function() {
+    var self = this;
 
-//  start: function() {
-//    var self = this;
-//
-//    // Bootstrap the MetaCoin abstraction for Use.
-//    MetaCoin.setProvider(web3.currentProvider);
-//
-//    // Get the initial account balance so it can be displayed.
-//    web3.eth.getAccounts(function(err, accs) {
-//      if (err != null) {
-//        alert("There was an error fetching your accounts.");
-//        return;
-//      }
-//
-//      if (accs.length == 0) {
-//        alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
-//        return;
-//      }
-//
-//      accounts = accs;
-//      account = accounts[0];
-//
-//      self.refreshBalance();
-//    });
-//  }
+    // Bootstrap the EcoToken abstraction for Use.
+    EcoToken.setProvider(web3.currentProvider);
 
-//  setStatus: function(message) {
-//    var status = document.getElementById("status");
-//    status.innerHTML = message;
-//  },
-//
-//  refreshBalance: function() {
-//    var self = this;
-//
-//    var meta;
-//    MetaCoin.deployed().then(function(instance) {
-//      meta = instance;
-//      return meta.getBalance.call(account, {from: account});
-//    }).then(function(value) {
-//      var balance_element = document.getElementById("balance");
-//      balance_element.innerHTML = value.valueOf();
-//    }).catch(function(e) {
-//      console.log(e);
-//      self.setStatus("Error getting balance; see log.");
-//    });
-//  },
+    // Get the initial account balance so it can be displayed.
+    web3.eth.getAccounts(function(err, accs) {
+      if (err != null) {
+        alert("There was an error fetching your accounts.");
+        return;
+      }
 
-//  sendCoin: function() {
-//    var self = this;
-//
-//    var amount = parseInt(document.getElementById("amount").value);
-//    var receiver = document.getElementById("receiver").value;
-//
-//    this.setStatus("Initiating transaction... (please wait)");
-//
-//    var meta;
-//    MetaCoin.deployed().then(function(instance) {
-//      meta = instance;
-//      return meta.sendCoin(receiver, amount, {from: account});
-//    }).then(function() {
-//      self.setStatus("Transaction complete!");
-//      self.refreshBalance();
-//    }).catch(function(e) {
-//      console.log(e);
-//      self.setStatus("Error sending coin; see log.");
-//    });
-//  }
+      if (accs.length == 0) {
+        alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
+        return;
+      }
+
+      accounts = accs;
+      account = accounts[0];
+
+      console.log('Account considered is ' + account);
+
+      self.getTotalUsage();
+      self.getTokenBalance();
+    });
+  },
+
+  setStatus: function(message) {
+    var status = document.getElementById("status");
+    status.innerHTML = message;
+  },
+
+  getTotalUsage: function() {
+      var self = this;
+
+      var meta;
+      EcoToken.deployed().then(function(instance) {
+        meta = instance;
+        return meta.totalUsageData.call(account, {from: account});
+      }).then(function(value) {
+        var balance_element = document.getElementById("usage");
+        balance_element.innerHTML = value.valueOf();
+      }).catch(function(e) {
+        console.log(e);
+        self.setStatus("Error getting usage; see log.");
+      });
+    },
+
+  getTokenBalance: function() {
+    var self = this;
+
+    var meta;
+    EcoToken.deployed().then(function(instance) {
+      meta = instance;
+      return meta.balanceOf.call(account, {from: account});
+    }).then(function(value) {
+      var balance_element = document.getElementById("balance");
+      value = value / (10 ** 18);
+      balance_element.innerHTML = value.valueOf();
+    }).catch(function(e) {
+      console.log(e);
+      self.setStatus("Error getting balance; see log.");
+    });
+  },
+
+  updateUsage: function() {
+    var self = this;
+
+    var amount = parseInt(document.getElementById("amount").value);
+
+    this.setStatus("Initiating transaction... (please wait)");
+
+    var meta;
+    EcoToken.deployed().then(function(instance) {
+      meta = instance;
+      return meta.updateTotalUsage(amount, {from: account});
+    }).then(function() {
+      self.setStatus("Transaction complete!");
+      self.getTotalUsage();
+    }).catch(function(e) {
+      console.log(e);
+      self.setStatus("Error sending coin; see log.");
+    });
+  }
 };
 
 window.addEventListener('load', function() {

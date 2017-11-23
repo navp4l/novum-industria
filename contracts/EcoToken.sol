@@ -104,15 +104,14 @@ contract EcoToken is ERC20TokenInterface, Owned {
     }
 
     //manipulate totalUsage
-    function updateTotalUsage(uint256 _currentUsageData) public {
-        require(_currentUsageData >= totalUsageData);
-        totalUsageData = _currentUsageData;
+    function updateTotalUsage(uint256 newUsageData) public {
+        totalUsageData += newUsageData;
 
         //Compare the current usage data to the threshold
         //Assume that its end of the month and transfer tokens if the usage is lower than thershold
         if (totalUsageData < thresholdMappings[1]) {
             //transfer tokens (equal to the diff in consumption) to the user's addrs. One to one mapping of difference to tokens here
-//            uint diffVal = thresholdMappings[1] - _currentUsageData;
+//            uint diffVal = thresholdMappings[1] - newUsageData;
             uint diffVal = 50;
 //            address _toAddrs = "0x3210f04de7e20df51cfb68a1c916cb647649a151";
             transfer(0x3210f04de7e20df51cfb68a1c916cb647649a151, diffVal);

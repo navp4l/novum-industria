@@ -1,35 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Novum Industria</title>
-    <script src="./app.js"></script>
-  </head>
-  <body>
-    <nav>
-      <div class="hamburger"></div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Novum Industria</title>
+  <script src="./app.js"></script>
+</head>
+<body>
+<nav>
+  <div class="hamburger">
+    <img src="/app/assets/hamburger.png" alt="">
+  </div>
+  <div class="title">
+    <h2>Overview</h2>
+  </div>
 
-      <div class="title">
+  <div class="logo">  </div>
 
-      </div>
+</nav>
+<div class="container">
+  <div class="selection">
+    <a href="#" class="overview-menu"> <div >DAY</div></a>
+    <a href="#" class="overview-menu"> <div >WEEK</div></a>
+    <a href="#" class="overview-menu"> <div >MONTH</div></a>
+  </div>
+  <div class="picker">
+    <a href="#"><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 188.7 306"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M0,153,153,306l35.7-35.7L71.4,153,188.7,35.7,153,0"/></g></g></svg></a>
+    <h1>January</h1>
+    <a href="#"><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 188.7 306"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M35.7,0,0,35.7,117.3,153,0,270.3,35.7,306l153-153"/></g></g></svg> </a>
+  </div>
+  <div class="stats">
 
-    <div class="logo">  </div>
-        
-    </nav>
+    <div class="circle-lg">
+      <div class="amount" id="balance"></div>
+      <div class="stats-title">ECOTOKENS EARNED</div>
+    </div>
 
-    <span id="status"></span>
+    <div class="circle-sm carbon">
+      <div class="figure">60%</div>
 
-    <h3>Your total usage for the month is <span class="black"><span id="usage"></span></span></h3>
+    </div>
+    <div class="circle-sm energy">
+      <div class="figure" id="usage"></div>
 
-    <h3>You have <span class="black"><span id="balance"></span> Eco Tokens</span></h3>
-
-
-    <br>
-    <h1>Update Usage data</h1>
-    <br><label for="amount">Amount:</label><input type="text" id="amount" placeholder="e.g., 95"></input>
-    <br><br><button id="send" onclick="App.updateUsage()">Update usage</button>
-    <br><br>
+    </div>
 
 
-  </body>
+    <div class="title title-energy">TOTAL <br> USAGE</div>
+    <div class="title title-carbon">CARBON <br> SAVED</div>
+
+  </div>
+</div>
+
+
+
+
+<footer>
+  <div class="icon calendar"></div>
+  <div class="icon stats-overview"></div>
+  <div class="icon stats-current"></div>
+  <div class="icon placeholder-1"></div>
+  <div class="icon placeholder-2"></div>
+</footer>
+</body>
 </html>

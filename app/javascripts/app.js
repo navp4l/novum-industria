@@ -49,7 +49,7 @@ window.App = {
 
   setStatus: function(message) {
     var status = document.getElementById("status");
-    status.innerHTML = message;
+    if(status)status.innerHTML = message;
   },
 
   getTotalUsage: function() {
@@ -61,7 +61,7 @@ window.App = {
         return meta.totalUsageData.call(account, {from: account});
       }).then(function(value) {
         var balance_element = document.getElementById("usage");
-        balance_element.innerHTML = value.valueOf();
+        if(balance_element)balance_element.innerHTML = value.valueOf();
       }).catch(function(e) {
         console.log(e);
         self.setStatus("Error getting usage; see log.");
@@ -78,7 +78,7 @@ window.App = {
     }).then(function(value) {
       var balance_element = document.getElementById("balance");
       value = value / (10 ** 18);
-      balance_element.innerHTML = value.valueOf();
+      if(balance_element)balance_element.innerHTML = value.valueOf();
     }).catch(function(e) {
       console.log(e);
       self.setStatus("Error getting balance; see log.");
